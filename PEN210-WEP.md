@@ -58,7 +58,9 @@
 
 **wlan0mon:** Es el nombre de la interfaz de red en modo monitor. Esta interfaz captura paquetes y, en este contexto, también inyecta tráfico en la red.
 
-### sudo aircrack-ng wifi-old-01.cap
+### Crackear la contraseña de una red Wi-Fi WEP
+
+    sudo aircrack-ng wifi-old-01.cap
 
 **aircrack-ng:** Es el componente de la suite Aircrack-ng que se utiliza para el crackeo de claves. Puede trabajar con varios algoritmos de encriptación, incluyendo WEP y WPA/WPA2 PSK (Pre-Shared Key).
 
