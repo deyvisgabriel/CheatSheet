@@ -16,13 +16,13 @@
 
 ### Iniciar captura y monitoreo de una red específica
 
-    sudo airodump-ng -c 44 --essid wifi-corp -w wifi-corp wlan0mon
+    sudo airodump-ng -c 1 --bssid F0:9F:C2:AA:19:29 -w wifi-old wlan0mon
 
 **airodump-ng:** Es la herramienta dentro de Aircrack-ng que permite capturar paquetes de redes Wi-Fi y monitorizar el tráfico inalámbrico en tiempo real.
 
-**-c 44:** Este parámetro le indica a airodump-ng que filtre y escuche solamente en el canal 44.
+**-c 1:** Este parámetro le indica a airodump-ng que filtre y escuche solamente en el canal 1.
 
-**--essid wifi-corp:** Este parámetro filtra la captura por el ESSID (Extended Service Set Identifier), que es el nombre visible de la red Wi-Fi, en este caso, "wifi-corp".
+**--bssid F0:9F:C2:AA:19:29:** Este parámetro filtra la captura por el BSSID, que es la dirección MAC de la red Wi-Fi, en este caso, "F0:9F:C2:AA:19:29".
 
 **-w wifi-corp:** Esta opción indica a airodump-ng que guarde los datos capturados en archivos con el prefijo "wifi-corp".
 
