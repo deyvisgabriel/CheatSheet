@@ -176,7 +176,8 @@ wpa_supplicant -i wlan0 -c wpa_supplicant.conf
 ```
 dhclient wlan0
 ```
-
+### 18. Bandera
+    curl http://<IP>/proof.txt
 
 
 
