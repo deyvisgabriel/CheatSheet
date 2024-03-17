@@ -39,5 +39,5 @@ sudo dhclient wlan0
 ```
 sudo ifconfig wlan0
 ```
-### 18. Bandera
+### 12. Bandera
     curl http://<IP>/proof.txt
