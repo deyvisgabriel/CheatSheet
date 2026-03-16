@@ -476,7 +476,7 @@ During execution, the exploit modified a camera configuration parameter and inse
 
 The script confirmed successful payload delivery with the message:
 ```
-\[\*\] Payload successfully injected. Check your shell...
+[*] Payload successfully injected. Check your shell...
 ```
   
 
