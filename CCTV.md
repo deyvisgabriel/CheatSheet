@@ -386,7 +386,8 @@ Earlier during local enumeration, I had identified an administrator credential w
 ```
 Using this information, I attempted to authenticate to the motionEye interface with the **admin username** and the discovered password value.
 ```
-Username: admin Password: 989c5a8ee87a0e9521ec81a79187d162109282f0
+Username: admin
+Password: 989c5a8ee87a0e9521ec81a79187d162109282f0
 ```
 The authentication attempt was successful, granting me access to the **motionEye administrative dashboard**.
 
