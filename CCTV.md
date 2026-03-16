@@ -569,7 +569,8 @@ ls
 ```
 The directory contained two files:
 ```
-SecureVision Staff Announcement.pdf user.txt
+SecureVision Staff Announcement.pdf
+user.txt
 ```
 The presence of the `user.txt` file indicated that this directory contained the **user flag** for the machine. I opened the file to read its contents.
 ```
