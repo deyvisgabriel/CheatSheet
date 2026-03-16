@@ -274,7 +274,7 @@ cat /etc/systemd/system/motioneye.service
 
 The service configuration revealed that the **motionEye server runs as the root user**, which immediately caught my attention.
 ```
-\[Service\]
+[Service\]
 User=root
 RuntimeDirectory=motioneye
 LogsDirectory=motioneye
