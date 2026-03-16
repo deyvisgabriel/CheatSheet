@@ -533,10 +533,6 @@ cat root.txt
 ```
 The file contained the **root flag**, confirming full compromise of the system:
 
-Hurray!!! I got the root flag!!!
-
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikVaBJMyTLKEP9VDVKxpx_veS9HJGRwg8k8Z3qdnLOmcHa6TsA8CLyLUNptHf1uj5xKmk3gXzd_j7fF1Kdz3i8WBPl42svPrjneUn-AWsB5o7BJV_fxVjc_ElJKQ1dG1GL6in5iuLnfzip2Z_5aQj12kmZXUs1hcPZcNEDeLVmmd44x8JxIakUZUh796-G/s16000/Super%20Bowl%20Dancing%20GIF.gif)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikVaBJMyTLKEP9VDVKxpx_veS9HJGRwg8k8Z3qdnLOmcHa6TsA8CLyLUNptHf1uj5xKmk3gXzd_j7fF1Kdz3i8WBPl42svPrjneUn-AWsB5o7BJV_fxVjc_ElJKQ1dG1GL6in5iuLnfzip2Z_5aQj12kmZXUs1hcPZcNEDeLVmmd44x8JxIakUZUh796-G/s480/Super%20Bowl%20Dancing%20GIF.gif)
-
 At this point, I had successfully escalated privileges from an initial web application foothold to **full root access**, completing the compromise of the target machine.
 
   
@@ -579,9 +575,5 @@ cat user.txt
 [![pterodactyl hack the box](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfom5mbjXUKHSU54REc-H3xdBrJejmNZrzCu6kwLVJm5x_LqUuG5IdB3tM9sUG2vJCdV7eufqKY0OKfboTbVdPfR0t2GAwWJMCB-thCVOMwlMra0EM9a7L06nK0I2TlyYaL3_YO_nNdtAqCEYrqPmfj065_TyN0qQghbtkcrM3xZW1HoYwrmwrpmrUYpkN/s16000/bandicam%202026-03-09%2017-47-57-718.jpg "pterodactyl hack the box")](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfom5mbjXUKHSU54REc-H3xdBrJejmNZrzCu6kwLVJm5x_LqUuG5IdB3tM9sUG2vJCdV7eufqKY0OKfboTbVdPfR0t2GAwWJMCB-thCVOMwlMra0EM9a7L06nK0I2TlyYaL3_YO_nNdtAqCEYrqPmfj065_TyN0qQghbtkcrM3xZW1HoYwrmwrpmrUYpkN/s1833/bandicam%202026-03-09%2017-47-57-718.jpg)
 
 The file revealed the user flag:
-
-Hurray!!! I got the user flag.
-
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSPNDxlpkrluejCIn9x_licnPUODqrLgyCnTwWJarDl0b8ekKUZGKprq5hWQbS-vA0a6QiB8Jnpo6dqq-_bmckodGhi2fLlpdQk4yGf_FNldCgIWLd_jMY9puCaRxpjMWTg0OJJ6r0-zLorgUzvd4fW9Gn57cunkn8kH0JeiiKVxspe6ArSoo9kbwJxw5f/s16000/Happy%20Party%20GIF.gif)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSPNDxlpkrluejCIn9x_licnPUODqrLgyCnTwWJarDl0b8ekKUZGKprq5hWQbS-vA0a6QiB8Jnpo6dqq-_bmckodGhi2fLlpdQk4yGf_FNldCgIWLd_jMY9puCaRxpjMWTg0OJJ6r0-zLorgUzvd4fW9Gn57cunkn8kH0JeiiKVxspe6ArSoo9kbwJxw5f/s480/Happy%20Party%20GIF.gif)
 
 With both the **user flag** and the **root flag** successfully retrieved, the compromise of the system was complete.
