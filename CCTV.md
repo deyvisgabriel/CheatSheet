@@ -1,12 +1,6 @@
 CCTV Hack the Box Walkthrough
 =============================
 
-Welcome to another Hack the Box walkthrough. In this blog post, I have demonstrated how I owned the CCTV machine on Hack the Box. Hack The Box is a cybersecurity platform that helps you bridge knowledge gaps and prepares you for cyber security jobs.
-
-You can also test and grow your penetration testing skills, from gathering information to reporting. If you are new to this blog, please do not forget to like, comment and subscribe to my YouTube channel and follow me on LinkedIn for more updates.
-
-  
-
 About the Machine
 -----------------
 
