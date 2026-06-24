@@ -5,30 +5,7 @@ La idea es hacer preguntas clave y responderlas con herramientas como `bloodyAD`
 
 ---
 
-## Contexto del escenario
-
-Datos usados en los comandos:
-
-```text
-Dominio: checkpoint.htb
-Controlador de dominio / Host: 10.129.168.103
-Usuario: alex.turner
-Contraseña: Checkpoint2024!
-```
-
-Comando inicial analizado:
-
-```bash
-bloodyAD --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable
-```
-
-Este comando consulta en Active Directory qué objetos puede modificar, crear o escribir el usuario autenticado.
-
----
-
 # 1. ¿Qué puedo modificar con mi usuario?
-
-Ya lo ejecutaste:
 
 ```bash
 bloodyAD --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable
