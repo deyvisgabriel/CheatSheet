@@ -8,7 +8,7 @@ La idea es hacer preguntas clave y responderlas con herramientas como `bloodyAD`
 # 1. ¿Qué puedo modificar con mi usuario?
 
 ```bash
-bloodyAD --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable
+bloodyad --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable
 ```
 
 Este comando muestra los objetos de Active Directory sobre los cuales el usuario `alex.turner` tiene permisos de escritura, creación o modificación.
@@ -16,7 +16,7 @@ Este comando muestra los objetos de Active Directory sobre los cuales el usuario
 También puedes pedir más detalle:
 
 ```bash
-bloodyAD --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable --detail
+bloodyad --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get writable --detail
 ```
 
 Ejemplo de salida:
@@ -33,7 +33,7 @@ Esto significa que el usuario puede crear objetos dentro de la OU `Employees`.
 # 2. ¿A qué grupos pertenece mi usuario?
 
 ```bash
-bloodyAD --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get membership alex.turner
+bloodyad --host 10.129.168.103 -d checkpoint.htb -u alex.turner -p 'Checkpoint2024!' get membership alex.turner
 ```
 
 Esto sirve para saber si el usuario pertenece a grupos interesantes.
