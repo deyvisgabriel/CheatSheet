@@ -1,4 +1,4 @@
-# Writeup en español — Hack The Box: Checkpoint
+# Writeup — Hack The Box: Checkpoint
 
 **Dificultad:** Medium  
 **Tipo de máquina:** Windows / Active Directory  
