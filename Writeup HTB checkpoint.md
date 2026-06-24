@@ -334,7 +334,7 @@ En esta máquina, el objetivo es `svc_deploy`.
 
 ## 12. Preparación de BadSuccessor contra `svc_deploy`
 
-Desde la información pública del writeup, se crea una dMSA que apunta a `svc_deploy`.
+Se crea una dMSA que apunta a `svc_deploy`.
 
 Ejemplo conceptual:
 
