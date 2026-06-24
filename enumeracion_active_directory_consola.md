@@ -1,6 +1,6 @@
 # Enumeración de Active Directory desde consola
 
-Sí. Desde consola puedes averiguar casi todo lo importante de Active Directory sin abrir BloodHound.  
+Desde la consola se puede averiguar casi todo lo importante de Active Directory sin abrir BloodHound.  
 La idea es hacer preguntas clave y responderlas con herramientas como `bloodyAD`, `NetExec` e `Impacket`.
 
 ---
