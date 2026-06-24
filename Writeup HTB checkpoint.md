@@ -239,7 +239,7 @@ Este tipo de hallazgo es importante en auditorías reales porque muchas organiza
 
 ## 8. Acceso como `mark.davies`
 
-Una vez restaurado el usuario, se valida si es posible autenticarse. En el writeup original se indica que existe reutilización de contraseña/hash, lo cual permite avanzar con `mark.davies`.
+Una vez restaurado el usuario, se valida si es posible autenticarse. Existe reutilización de contraseña/hash, lo cual permite avanzar con `mark.davies`.
 
 Se puede probar SMB con hash NTLM:
 
