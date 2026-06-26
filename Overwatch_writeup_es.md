@@ -168,10 +168,6 @@ software$   READ            Software Repository
 
 El recurso compartido `software$` permite lectura usando la cuenta `guest`. Esto representa una mala práctica, porque un usuario no autenticado o de bajo privilegio puede descargar archivos internos.
 
-```bash
-smbclient //overwatch.htb/software$ -U 'guest%' -c 'prompt OFF; recurse ON; mget *'
-```
-
 ---
 
 ### 4.2 Descarga del recurso compartido
