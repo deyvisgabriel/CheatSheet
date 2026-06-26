@@ -158,6 +158,8 @@ Resultado relevante:
 ```text
 Share       Permissions     Remark
 -----       -----------     ------
+ADMIN$                      Remote Admin
+C$                          Default share
 IPC$        READ            Remote IPC
 software$   READ            Software Repository
 ```
@@ -165,6 +167,10 @@ software$   READ            Software Repository
 **Explicación:**
 
 El recurso compartido `software$` permite lectura usando la cuenta `guest`. Esto representa una mala práctica, porque un usuario no autenticado o de bajo privilegio puede descargar archivos internos.
+
+```bash
+smbclient //overwatch.htb/software$ -U 'guest%' -c 'prompt OFF; recurse ON; mget *'
+```
 
 ---
 
