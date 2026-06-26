@@ -1,13 +1,5 @@
 # Overwatch WriteUp — Hack The Box
 
-> **Fuente original:** Hackpuntes — *Overwatch WriteUp*  
-> **Autor original:** Javier Olmedo  
-> **Fecha del writeup original:** 9 de mayo de 2026  
-> **Tipo de documento:** Adaptación y explicación en español para estudio.  
->
-> Nota: este archivo no es una traducción literal completa del artículo original. Es una versión explicada, organizada y adaptada al español para facilitar el aprendizaje en un entorno controlado de laboratorio CTF/HTB.
-
-![Overwatch Banner](https://hackpuntes.com/images/hackthebox/machines/overwatch/overwatch-banner.png)
 
 ---
 
@@ -216,15 +208,6 @@ dotnet tool install ilspycmd -g --version 8.2.0.7535
 
 En el código decompilado se encuentran dos elementos importantes:
 
-1. Credenciales embebidas para conexión a base de datos.
-2. Definición de un servicio WCF con un método llamado `KillProcess`.
-
-Ejemplo conceptual del fragmento vulnerable:
-
-```csharp
-string scriptContents = "Stop-Process -Name " + processName + " -Force";
-```
-
 ```csharp
 [ServiceContract]
 public interface IMonitoringService
@@ -244,6 +227,15 @@ public class MonitoringService : IMonitoringService
         // ...executes scriptContents in a PowerShell Runspace and returns the output
     }
 }
+```
+
+1. Credenciales embebidas para conexión a base de datos.
+2. Definición de un servicio WCF con un método llamado `KillProcess`.
+
+Ejemplo conceptual del fragmento vulnerable:
+
+```csharp
+string scriptContents = "Stop-Process -Name " + processName + " -Force";
 ```
 
 **Credenciales identificadas:**
