@@ -225,6 +225,27 @@ Ejemplo conceptual del fragmento vulnerable:
 string scriptContents = "Stop-Process -Name " + processName + " -Force";
 ```
 
+[ServiceContract]
+public interface IMonitoringService
+{
+    [OperationContract] string StartMonitoring();
+    [OperationContract] string StopMonitoring();
+    [OperationContract] string KillProcess(string processName);
+}
+
+```csharp
+public class MonitoringService : IMonitoringService
+{
+    private readonly string connectionString = "Server=localhost;Database=SecurityLogs;User Id=sqlsvc;Password=TI0LKcfHzZw1Vv;";
+
+    public string KillProcess(string processName)
+    {
+        string scriptContents = "Stop-Process -Name " + processName + " -Force";
+        // ...executes scriptContents in a PowerShell Runspace and returns the output
+    }
+}
+```
+
 **Credenciales identificadas:**
 
 ```text
