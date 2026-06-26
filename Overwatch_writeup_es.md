@@ -225,6 +225,7 @@ Ejemplo conceptual del fragmento vulnerable:
 string scriptContents = "Stop-Process -Name " + processName + " -Force";
 ```
 
+```csharp
 [ServiceContract]
 public interface IMonitoringService
 {
@@ -233,7 +234,6 @@ public interface IMonitoringService
     [OperationContract] string KillProcess(string processName);
 }
 
-```csharp
 public class MonitoringService : IMonitoringService
 {
     private readonly string connectionString = "Server=localhost;Database=SecurityLogs;User Id=sqlsvc;Password=TI0LKcfHzZw1Vv;";
