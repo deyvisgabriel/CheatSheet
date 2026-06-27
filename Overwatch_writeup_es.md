@@ -98,6 +98,8 @@ sudo nmap -p- --open -Pn --min-rate 5000 -oA ports -vvv overwatch.htb
 
 ```bash
 grep -oP '\d+/open' ports.gnmap | cut -d'/' -f1 | sort -u | tr '\n' ',' | sed 's/,$//' > ports.txt
+```
+```bash
 sudo nmap -sCV -p$(cat ports.txt) -Pn -oA scan -vvv overwatch.htb
 ```
 
