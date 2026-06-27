@@ -64,12 +64,12 @@ Dump de hashes y acceso Administrator por Pass-the-Hash
 Primero se agrega el dominio de la máquina al archivo `/etc/hosts`. Esto permite referenciar la IP objetivo usando el nombre `overwatch.htb`.
 
 ```bash
-echo "10.129.41.13 overwatch.htb" | sudo tee -a /etc/hosts
+echo "<IP> overwatch.htb" | sudo tee -a /etc/hosts
 ```
 
 **Explicación:**
 
-- `10.129.41.13` corresponde a la IP de la máquina en HTB.
+- `<IP>` corresponde a la IP de la máquina en HTB.
 - `overwatch.htb` es el nombre que se usará para resolver el host.
 - `tee -a` agrega la línea al final del archivo sin sobrescribir su contenido.
 
