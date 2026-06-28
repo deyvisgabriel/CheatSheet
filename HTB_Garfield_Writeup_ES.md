@@ -153,7 +153,7 @@ Conclusión: esta vía no permite tomar control directamente mediante cambio de 
 El usuario actual tiene permisos de lectura sobre `SYSVOL`. Se accede al recurso compartido:
 
 ```bash
-smbclient //garfield.htb/SYSVOL -U 'j.arbuckle'
+smbclient //<IP>/SYSVOL -U 'j.arbuckle'
 ```
 
 Dentro de `smbclient`:
