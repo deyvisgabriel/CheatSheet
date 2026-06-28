@@ -103,10 +103,10 @@ Conclusión inicial: el objetivo es un **controlador de dominio Active Directory
 Con credenciales del usuario `j.arbuckle`, se enumeran recursos compartidos y usuarios mediante NetExec:
 
 ```bash
-nxc smb 10.129.83.35 -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' --shares
+nxc smb garfield.htb -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' --shares
 ```
 ```bash
-nxc smb 10.129.83.35 -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' --users
+nxc smb garfield.htb -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' --users
 ```
 
 Durante la enumeración se identifican usuarios como:
