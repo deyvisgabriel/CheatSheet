@@ -215,7 +215,15 @@ dir
 exit
 ```
 
-### 7.4 Modificar `scriptPath` del usuario Liz Wilson
+### 7.4 Escuchar desde Linux
+
+Se configura la escucha:
+
+```bash
+nc -lvnp 4444
+```
+
+### 7.5 Modificar `scriptPath` del usuario Liz Wilson
 
 Se configura el atributo `scriptPath` para que el usuario `Liz Wilson` ejecute `printerDetect.bat` al iniciar sesión:
 
