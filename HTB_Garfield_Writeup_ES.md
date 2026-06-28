@@ -1,10 +1,4 @@
-# HTB Season 10 – Garfield: Writeup completo traducido al español
-
-> **Fuente original:** CNBlogs – dynasty_chenzi  
-> **Título original:** `〖渗透测试〗HTB Season10 Garfield 全过程wp`  
-> **URL:** https://www.cnblogs.com/DSchenzi/p/19849166  
-> **Uso recomendado:** material de estudio en laboratorio/CTF autorizado.
-
+# HTB Garfield: Writeup completo
 ---
 
 ## 1. Información inicial
