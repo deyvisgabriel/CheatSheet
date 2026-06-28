@@ -1,4 +1,5 @@
 # HTB Garfield: Writeup completo
+
 ---
 
 ## 1. Información inicial
