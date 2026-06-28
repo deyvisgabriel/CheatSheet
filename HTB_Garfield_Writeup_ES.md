@@ -121,7 +121,7 @@ Durante la enumeración se identifican usuarios como:
 Se utiliza `bloodyAD` para listar objetos del dominio sobre los cuales el usuario actual tiene permisos de escritura o modificación:
 
 ```bash
-bloodyAD --host 10.129.195.195 -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' get writable
+bloodyAD --host garfield.htb -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' get writable
 ```
 
 Hallazgos:
