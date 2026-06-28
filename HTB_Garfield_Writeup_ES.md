@@ -11,14 +11,43 @@
 
 La máquina corresponde a un entorno de **Active Directory** con un controlador de dominio identificado como `DC01.garfield.htb`. Durante el reconocimiento se observan servicios típicos de un dominio Windows, incluyendo DNS, Kerberos, LDAP, SMB, RDP y WinRM.
 
+
+---
+
+Primero se agrega el dominio de la máquina al archivo `/etc/hosts`. Esto permite referenciar la IP objetivo usando el nombre `overwatch.htb`.
+
+```bash
+echo "<IP> garfield.htb" | sudo tee -a /etc/hosts
+```
+
 ---
 
 ## 2. Recolección de información
 
 Se ejecuta un escaneo agresivo con Nmap:
 
+#### Descubrimiento rápido de puertos TCP
+
 ```bash
-nmap -A -T4 10.129.83.35
+sudo nmap -p- --open -Pn --min-rate 5000 -oA ports -vvv garfield.htb
+```
+
+**Explicación:**
+
+- `-p-`: escanea todos los puertos TCP.
+- `--open`: muestra solo puertos abiertos.
+- `-Pn`: evita descubrimiento por ping.
+- `--min-rate 5000`: acelera el escaneo enviando paquetes a una tasa mínima.
+- `-oA ports`: guarda resultados en varios formatos con nombre base `ports`.
+- `-vvv`: aumenta el nivel de detalle en pantalla.
+
+#### Detección de versiones y scripts básicos
+
+```bash
+grep -oP '\d+/open' ports.gnmap | cut -d'/' -f1 | sort -u | tr '\n' ',' | sed 's/,$//' > ports.txt
+```
+```bash
+sudo nmap -sCV -p$(cat ports.txt) -Pn -oA scan -vvv garfield.htb
 ```
 
 Resultado relevante:
