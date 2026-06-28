@@ -139,7 +139,7 @@ Esto puede estar relacionado con abuso de **ADIDNS/WPAD hijacking**, una técnic
 Se intenta modificar la contraseña de `l.wilson`:
 
 ```bash
-bloodyAD --host 10.129.195.195 -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' set password l.wilson 'NewPass@123!'
+bloodyAD --host garfield.htb -u 'j.arbuckle' -p 'Th1sD4mnC4t!@1978' set password l.wilson 'NewPass@123!'
 ```
 
 El intento no funciona porque el usuario `j.arbuckle` tiene permiso genérico de escritura sobre el objeto, pero no cuenta con el permiso específico para cambiar o resetear la contraseña.
@@ -153,7 +153,7 @@ Conclusión: esta vía no permite tomar control directamente mediante cambio de 
 El usuario actual tiene permisos de lectura sobre `SYSVOL`. Se accede al recurso compartido:
 
 ```bash
-smbclient //10.129.195.195/SYSVOL -U 'j.arbuckle'
+smbclient //garfield.htb/SYSVOL -U 'j.arbuckle'
 ```
 
 Dentro de `smbclient`:
